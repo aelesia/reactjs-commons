@@ -1,6 +1,7 @@
 .github/
 coverage/
 tests/
+docs/
 
 .eslintrc.json
 .prettierrc
