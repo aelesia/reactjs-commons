@@ -170,10 +170,10 @@ By default, the `loading` and `disabled` state is set based on the `onClick` han
 export const OnClickButton = withAsync(Button);
 export const OnClickButton = withAsync(Button);
 export const OnMouseEnterButton = withAsync(Button, {
-  asyncHandlers: "onMouseEnter"
+  asyncHandler: "onMouseEnter"
 });
 export const OnMouseLeaveButton = withAsync(Button, {
-  asyncHandlers: "onMouseLeave"
+  asyncHandler: "onMouseLeave"
 });
 ```
 
@@ -197,7 +197,7 @@ As React Native uses `onPress` instead of `onClick`, pass in an `'onPress'` as t
 
 ```tsx
 export const OnClickButton = withAsync(Button, {
-  asyncHandlers: "onPress"
+  asyncHandler: "onPress"
 });
 ```
 
