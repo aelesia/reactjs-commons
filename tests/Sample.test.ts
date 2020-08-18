@@ -1,5 +1,8 @@
+import { withAsync } from '../src/hoc/withAsync'
+
 // TODO: Write proper tests
 describe('withAsync', () => {
-  expect(true).toEqual(true)
+  it('will pass', () => {
+    expect(true).toEqual(true)
+  })
 })
-
