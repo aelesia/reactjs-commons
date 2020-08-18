@@ -10,6 +10,8 @@ A powerful function to abstract away your loading states
   - [Material UI](https://codesandbox.io/s/weathered-breeze-x0kt1?file=/src/samples/MaterialButton.tsx)
   - [Vanilla React](https://codesandbox.io/s/weathered-breeze-x0kt1?file=/src/samples/ReactButton.tsx)
 
+## Usage
+
 1) Convert your Button to an AsyncButton:
     
     [Click here for examples in other mainstream libraries](docs/samples.md)  
@@ -57,7 +59,18 @@ A powerful function to abstract away your loading states
     </AsyncButton>
     ```
 
-## Why
+## What does withAsync do?
+
+`withAsync` wraps any component that has a handler (the most common one being `onClick()`), and automatically injects two props:
+
+- loading: boolean
+- disabled: boolean
+
+`withAsync` will automatically detect if an async function is being passed to the handler, then set both `loading` and `disabled` to `true` when the handler is invoked.
+
+After the handler has resolved the promise, it will set `loading` and `disabled` back to `false`
+
+## Why do I need this for?
 
 Have you ever had to display a loading state on your button while it completes an asynchronous request? Chances are you've written code similar to this before:
 
@@ -82,19 +95,27 @@ return (
 ```
 
 It works fine if you only have 1 or 2 buttons. But it gets tedious to write after a few times. `withAsync` abstracts this code from you so you never need to manage `loading` states again.
+__________
 
-## What does withAsync do?
 
-`withAsync` wraps any component that has a handler (the most common one being `onClick()`), and automatically injects two props:
+For comparison, look how much shorter the new code is after using the `withAsync` HOC. While it may not look like much initially, the difference will accumulate after you've adding dozens of buttons.
 
-- loading: boolean
-- disabled: boolean
+```tsx
+const AsyncButton = withAsync(Button)
 
-`withAsync` will automatically detect if an async function is being passed to the handler, then set both `loading` and `disabled` to `true` when the handler is invoked.
+async function onClick() {
+  await delay(1000);
+}
 
-After the handler has resolved the promise, it will set `loading` and `disabled` back to `false`
+return (
+  <AsyncButton onClick={onClick}>
+    Button
+  </Button>
+)
+```
 
-## Customization when Loading
+
+## Customizing Loading Appearance
 
 https://codesandbox.io/s/weathered-breeze-x0kt1?file=/src/samples/CustomizedButtons.tsx
 
