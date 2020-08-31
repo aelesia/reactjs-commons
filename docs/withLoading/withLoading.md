@@ -14,7 +14,7 @@ A powerful function to abstract away your loading states
 
 1) Convert your Button to an AsyncButton:
     
-    [Click here for examples in other mainstream libraries](docs/withLoading/samples.md)  
+    [Click here for examples in other mainstream libraries](./samples.md)  
 
     ```tsx
     // If you are using a Component Library

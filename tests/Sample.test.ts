@@ -1,4 +1,4 @@
-import { withAsync } from '../src/hoc/withAsync'
+import { withLoading } from 'src/hoc/withLoading'
 
 // TODO: Write proper tests
 describe('withAsync', () => {
