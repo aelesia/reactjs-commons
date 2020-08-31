@@ -26,11 +26,11 @@ function getAsyncHandlers(key?: string | string[]): string[] {
   }
 }
 
-export const withAsync = <T extends JSXElementConstructor<any>>(
-  WrappedComponent: T,
-  options?: withAsyncOptions<T>
+export const withLoading = <Component extends JSXElementConstructor<any>>(
+  WrappedComponent: Component,
+  options?: withAsyncOptions<Component>
 ) => {
-  const HOC: React.FC<React.ComponentProps<T>> = (p: any) => {
+  const HOC: React.FC<React.ComponentProps<Component>> = (p: any) => {
     // @ts-ignore
     const asyncHandler = getAsyncHandlers(options?.asyncHandler)
     const [loading, setLoading] = useState<boolean>(false)

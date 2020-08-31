@@ -5,6 +5,7 @@ on:
       - 'master'
       - 'develop'
       - 'npm/next'
+      - 'feature/*'
 
 jobs:
   compile:

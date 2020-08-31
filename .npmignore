@@ -2,6 +2,7 @@
 coverage/
 tests/
 docs/
+sample/
 
 .eslintrc.json
 .prettierrc
