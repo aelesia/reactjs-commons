@@ -33,58 +33,50 @@ const Button: React.FC<
   )
 }
 
-const MyButton = withStyle(Button)({
-  width: 200,
-  marginTop: 4,
-  marginBottom: 4,
-  borderWidth: 1,
-  borderRadius: 10
+const RoundedButton = withStyle(Button)({
+  marginTop: 8,
+  borderRadius: 10,
+  borderWidth: 0.5
 })
 
-const RoundedButton = withStyle(MyButton)({
-  borderRadius: 10
+const ShadowRoundedButton = withStyle(RoundedButton)({
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 4
+  },
+  shadowOpacity: 0.5,
+  shadowRadius: 2.62,
+  elevation: 2
 })
-const CircleButton = withStyle(MyButton)<{ size: number }>(props => ({
-  borderRadius: props.size,
+
+const DisabledButton = withStyle(RoundedButton)(props => ({
+  backgroundColor: props.disabled ? '#999' : '#F0F0F0'
+}))
+
+const CircleButton = withStyle(Button)<{ size: number }>(props => ({
+  borderRadius: props.size / 2,
   height: props.size,
   width: props.size
 }))
 
-// Colored Buttons
-const YellowButton = withStyle(MyButton)({
-  backgroundColor: '#FFCC00'
-})
-const RedButton = withStyle(MyButton)({
-  backgroundColor: '#FF3333'
-})
-const BlueButton = withStyle(MyButton)({
-  backgroundColor: '#0088FF'
-})
-
-// Combined Buttons
-const YellowRoundedButton = withStyle(RoundedButton)({
-  backgroundColor: '#FFCC00'
-})
-const YellowCircleButton = withStyle(CircleButton)({
-  backgroundColor: '#FFCC00'
-})
-
 export const _Button = () => {
   return (
-    <View style={{ display: 'flex', flexDirection: 'column' }}>
-      <Text>Styled Buttons</Text>
-      <MyButton>My Button</MyButton>
-      <RoundedButton>Rounded Button</RoundedButton>
-      <CircleButton size={50}>Circle</CircleButton>
+    <View style={{ width: 200 }}>
+      <Button>Regular Button</Button>
+      <RoundedButton onPress={() => console.log('onClick')}>My Rounded Button</RoundedButton>
+      <RoundedButton style={{ backgroundColor: '#FFCC00' }}>My Yellow Button</RoundedButton>
+      <RoundedButton style={{ borderWidth: 1, borderColor: '#FF3333' }}>My Red Border Button</RoundedButton>
+      <ShadowRoundedButton>My Shadow Button</ShadowRoundedButton>
 
-      <Text>Colored Buttons</Text>
-      <YellowButton>Yellow Button</YellowButton>
-      <RedButton>Red Button</RedButton>
-      <BlueButton>Blue Button</BlueButton>
+      <DisabledButton>Enabled</DisabledButton>
+      <DisabledButton disabled={true}>Disabled</DisabledButton>
 
-      <Text>Combined</Text>
-      <YellowRoundedButton>Yellow Rounded Button</YellowRoundedButton>
-      <YellowCircleButton size={50}>Yellow Circle</YellowCircleButton>
+      <View style={{ flexDirection: 'row', marginTop: 10 }}>
+        <CircleButton size={40}>S40</CircleButton>
+        <CircleButton size={60}>S60</CircleButton>
+        <CircleButton size={50}>S50</CircleButton>
+      </View>
     </View>
   )
 }

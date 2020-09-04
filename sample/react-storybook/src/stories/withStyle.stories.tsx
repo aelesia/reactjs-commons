@@ -1,7 +1,6 @@
 import React, { HTMLAttributes } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { withStyle } from '../reactjs-commons/src/hoc/withStyle'
-import { View } from 'react-native'
 
 export default {
   title: 'HOC/withStyle'
@@ -9,7 +8,8 @@ export default {
 
 const RoundedButton = withStyle('button')({
   marginTop: 8,
-  borderRadius: 10
+  borderRadius: 10,
+  borderWidth: 0.5
 })
 
 const ShadowRoundedButton = withStyle(RoundedButton)({
@@ -17,7 +17,7 @@ const ShadowRoundedButton = withStyle(RoundedButton)({
 })
 
 const DisabledButton = withStyle(RoundedButton)(props => ({
-  backgroundColor: props.disabled ? '#999' : '#FF'
+  backgroundColor: props.disabled ? '#999' : '#F0F0F0'
 }))
 
 const CircleButton = withStyle('button')<{ size: number }>(props => ({
@@ -32,7 +32,7 @@ export const _Button = () => {
       <button>Regular Button</button>
       <RoundedButton onClick={() => console.log('onClick')}>My Rounded Button</RoundedButton>
       <RoundedButton style={{ backgroundColor: '#FFCC00' }}>My Yellow Button</RoundedButton>
-      <RoundedButton style={{ borderColor: '#FF3333' }}>My Red Border Button</RoundedButton>
+      <RoundedButton style={{ borderWidth: 1, borderColor: '#FF3333' }}>My Red Border Button</RoundedButton>
       <ShadowRoundedButton>My Shadow Button</ShadowRoundedButton>
 
       <DisabledButton>Enabled</DisabledButton>
