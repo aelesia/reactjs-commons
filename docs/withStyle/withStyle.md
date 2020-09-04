@@ -4,11 +4,10 @@ A simple minimalist function to add styles to existing components, in order to c
 
 You can try it out here:
 
-- [React Sandbox](https://codesandbox.io/s/withstyle-qwebt)
-- [React Native Sandbox](https://codesandbox.io/s/withstyle-react-native-zfe43) 
+- [React Sandbox](https://codesandbox.io/s/withstyle-qwebt?file=/src/ReactSandbox.tsx)
+- [React Native Sandbox](https://codesandbox.io/s/withstyle-react-native-zfe43?file=/src/ReactNativeSandbox.tsx)  
 
 ## Basic Usage
-
 
 1) Installation
 
@@ -107,7 +106,7 @@ Finally, you can also add new props.
 Let's create a new CircleButton that takes in a prop `size`, which determine's its `height/width/borderRadius`.
 
 ```tsx
-const CircleButton = withStyle('button')<{ size: number }>(props => ({
+const CircleButton = withStyle('button')(props => ({
   borderRadius: props.size / 2,
   height: props.size,
   width: props.size
@@ -122,7 +121,7 @@ const CircleButton = withStyle('button')<{ size: number }>(props => ({
 
 ![](https://i.imgur.com/Yo2gnS3.png)
 
-**Typescript**
+## Typescript
 
 If you are using Typescript, you can annotate the new props like this:
 
@@ -140,37 +139,11 @@ You will now receive autocomplete and compilation errors on both the prop and th
 
 ![](https://i.imgur.com/fI988xD.png)
 
-## Intellisense
-
-`withStyles` was built with full Typescript & Intellisense support.
-
-As such, all components will retain the props of the original component that it extended:
-
-![](https://i.imgur.com/9eQHzlW.gif)
-
-Newly added props are also available when performing styling:
-
-![](https://i.imgur.com/0leN9Mb.gif)
-
-## Typescript
-
-If you are adding a new prop to your component, you may use the following syntax for better Intellisense:
-
-```tsx
-const CircleButton = withStyle(Button)<size: number>(props=>({
-  borderRadius: props.size,
-  height: props.size,
-  width: props.size
-}))
-```
-
-You will now be prompted to include the `size` prop when constructing a new `CircleButton`
-
-![](https://i.imgur.com/nSQl0qx.gif)
-
 ## Why did you build this?
 
-After working on a large ReactNative app, I ended up with a lot of components that only required a bit of styling, but it was a pain having to forward props and styling, while being careful such that you don't overwrite styles accidentally. It was also annoying to have to re-forward all the prop types too to continue to benefit from Intellisense. I ended up with lots of code that looked like this:
+After working on a large ReactNative app, I ended up with a lot of components that only required a bit of styling, but it was a pain having to forward props and styling, while being careful such that you don't overwrite styles accidentally. 
+
+It was also annoying to have to re-forward all the prop types too to continue to benefit from Intellisense. I ended up with lots of code that looked like this:
 
 ```tsx
 export const CircleButton: React.FC<
@@ -212,4 +185,4 @@ In short, it is meant for people who want some of the benefits of `styled-compon
 
 If you are already using `styled-components`, this library will not provide you anything new.
 
-However if you are using ReactNative, you may find this library beneficial as it is able to provide you auto-completion of the correct styles
+However if you are using ReactNative, you may find this library beneficial as it is able to provide you auto-completion with the correct styles
