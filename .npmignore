@@ -3,9 +3,11 @@ coverage/
 tests/
 docs/
 sample/
+src/
 
 .eslintrc.json
 .prettierrc
+index.ts
 jest.config.js
 jest.setup.js
 tsconfig.json
