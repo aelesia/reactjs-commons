@@ -1,8 +1,8 @@
 {
   "name": "reactjs-commons",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "description": "Common set of utilities for ReactJS",
-  "keywords": ["withAsync", "async", "loading", "button", "react", "react-native"],
+  "keywords": ["withLoading", "withStyle", "react", "react-native"],
   "author": "aelesia",
   "license": "MIT",
   "repository": "https://github.com/aelesia/reactjs-commons",
