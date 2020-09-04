@@ -2,7 +2,7 @@ import React, { ReactHTML } from 'react'
 
 export function withStyle<T extends keyof ReactHTML>(
   HTMLFactory: T
-): <Props>(
+): <Props = {}>(
   style:
     | JSX.IntrinsicElements[T]['style']
     | ((props: JSX.IntrinsicElements[T] & Props) => JSX.IntrinsicElements[T]['style'])

@@ -1,38 +1,50 @@
 # withStyle
 
-A simple minimalist function to add styles to existing components, in order to create more flexible, reusable functions. Compatible with React & ReactNative with first class Intellisense support.  
+A simple minimalist function to add styles to existing components, in order to create more flexible, reusable functions. Compatible with React & ReactNative with first class Intellisense support.
 
-## Basic Usage
+You can try it out here:
 
-Create a new component with styling
-```tsx
-const MyButton = withStyle('button')({
-  borderRadius: 10,
-})
+- [React Sandbox](https://codesandbox.io/s/withstyle-qwebt)
+- [React Native Sandbox](https://codesandbox.io/s/withstyle-react-native-zfe43) 
 
-const YellowButton = withStyle(MyButton)({
-  backgroundColor: '#FFCC00',
-})
+## Usage
 
-const RedButton = withStyle(MyButton)({
-  backgroundColor: '#FF3333'
-})
+1) Install
 
-const BlueButton = withStyle(MyButton)({
-  backgroundColor: '#0088FF'
-})
-```
+    - yarn: `yarn add reactjs-commons`
+    - npm: `npm install reactjs-commons`
 
-Call the component
-```tsx
-return (
-  <div>
-    <YellowButton>Yellow Button</YellowButton>
-    <RedButton>Red Button</RedButton>
-    <BlueButton>Blue Button</BlueButton>
-  </div>
-)
-```
+2) Create a new component with styling
+    ```tsx
+   import { withStyle } from "reactjs-commons";
+   
+    const MyButton = withStyle('button')({
+      borderRadius: 10,
+    })
+    
+    const YellowButton = withStyle(MyButton)({
+      backgroundColor: '#FFCC00',
+    })
+    
+    const RedButton = withStyle(MyButton)({
+      backgroundColor: '#FF3333'
+    })
+    
+    const BlueButton = withStyle(MyButton)({
+      backgroundColor: '#0088FF'
+    })
+    ```
+
+3) Call the component
+    ```tsx
+    return (
+      <div>
+        <YellowButton>Yellow Button</YellowButton>
+        <RedButton>Red Button</RedButton>
+        <BlueButton>Blue Button</BlueButton>
+      </div>
+    )
+    ```
 
 ![](https://i.imgur.com/Rpj9AWL.png)
 
