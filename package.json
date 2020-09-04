@@ -1,6 +1,6 @@
 {
   "name": "reactjs-commons",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Common set of utilities for ReactJS",
   "keywords": ["withLoading", "withStyle", "react", "react-native"],
   "author": "aelesia",
