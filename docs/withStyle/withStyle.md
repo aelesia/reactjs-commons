@@ -1,25 +1,25 @@
 # withStyle
 
-A simple function to add styles to existing components with full Intellisense support. Compatible with React & ReactNative.
+A simple minimalist function to add styles to existing components, in order to create more flexible, reusable functions. Compatible with React & ReactNative with first class Intellisense support.  
 
 ## Basic Usage
 
 Create a new component with styling
 ```tsx
-const Button: React.FC<HTMLAttributes<HTMLButtonElement>> = p => <button {...p}/>
+const MyButton = withStyle('button')({
+  borderRadius: 10,
+})
 
-const YellowButton = withStyle(Button)({
+const YellowButton = withStyle(MyButton)({
   backgroundColor: '#FFCC00',
 })
 
-const RedButton = withStyle(Button)({
-  backgroundColor: '#FF3333',
-  color: "white"
+const RedButton = withStyle(MyButton)({
+  backgroundColor: '#FF3333'
 })
 
-const BlueButton = withStyle(Button)({
-  backgroundColor: '#0088FF',
-  color: "white"
+const BlueButton = withStyle(MyButton)({
+  backgroundColor: '#0088FF'
 })
 ```
 
@@ -34,7 +34,7 @@ return (
 )
 ```
 
-![](https://i.imgur.com/fgN5aFs.png)
+![](https://i.imgur.com/Rpj9AWL.png)
 
 ## Adding Props
 
@@ -52,8 +52,12 @@ const CircleButton = withStyle(Button)(props=>({
 
 CircleButton now takes in a new prop `size`
 ```jsx
-return <CircleButton size={50}>Circle</YellowCircleButton>
+<CircleButton size={30}>30</CircleButton>
+<CircleButton size={40}>40</CircleButton>
+<CircleButton size={50}>50</CircleButton>
 ```
+
+![](https://i.imgur.com/lNEFDUC.png)
 
 ## Combining Components
 
@@ -86,9 +90,9 @@ As such, all components will retain the props of the original component that it 
 
 ![](https://i.imgur.com/9eQHzlW.gif)
 
-Existing and newly added props are also available when performing styling:
+Newly added props are also available when performing styling:
 
-![](https://i.imgur.com/yRVOGJd.gif)
+![](https://i.imgur.com/0leN9Mb.gif)
 
 ## Typescript
 
@@ -106,20 +110,6 @@ You will now be prompted to include the `size` prop when constructing a new `Cir
 
 ![](https://i.imgur.com/nSQl0qx.gif)
 
-## Comparison with `styled-components`
-
-`withStyle` is: 
-- meant to be a simple lightweight one-line function to help you create re-usable and composable components.
-- meant to provide a syntax which is more familiar to React developers
-- meant to provide a consistent API between React and ReactNative
-- meant to provide accurate Intellisense for all platforms
-
-In short, it is meant for people who want some of the benefits of `styled-components` paired with accurate Intellisense with a more familiar API.
-
-If you are presently using `styled-components`, this library will not provide you anything new.
-
-However if you are using ReactNative, you may find this library beneficial as it provides first class Intellisense support.
-
 ## Why do I need this?
 
 You might be wondering, why not just write the following code instead:
@@ -130,7 +120,22 @@ const YellowButton = p => <Button style={{backgroundColor:'yellow'}} {...p} />
 
 - You lose out on Intellisense support if you are using a modern IDE like VSCode or WebStorm. All additional props that are available on `Button` such as `onClick` will no longer be suggested.
 
+_____
+
 ```tsx
 return <YellowButton style={{padding: 4}}>Yellow Button</YellowButton>
 ```
-- In the above code, your styling will clash. Your original style of `backgroundColor:'yellow'` will be overwritten by `padding: 4`. `withStyle` will always merge your styling properly.
+- In the above code, your styling will clash. Your original style of `backgroundColor:'yellow'` will be overwritten by `padding: 4`. When you use `withStyle`, it will always merge your styles correctly instead of overwriting them.
+
+## Comparison with `styled-components`
+
+`withStyle` is: 
+- meant to be a simple lightweight one-line function to help you create re-usable components with no extra setup
+- meant to provide a syntax which is more familiar to React developers
+- meant to provide accurate Intellisense for both React & ReactNative
+
+In short, it is meant for people who want some of the benefits of `styled-components` paired with accurate Intellisense and a more familiar API, but do not want a full library for it.
+
+If you are already using `styled-components`, this library will not provide you anything new.
+
+However if you are using ReactNative, you may find this library beneficial as it is able to provide you autocompletion of the correct styles
