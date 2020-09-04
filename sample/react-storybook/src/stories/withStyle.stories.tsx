@@ -6,56 +6,43 @@ export default {
   title: 'HOC/withStyle'
 } as Meta
 
-const MyButton = withStyle('button')({
-  width: 200,
-  marginTop: 4,
-  marginBottom: 4,
-  borderWidth: 1
+const RoundedButton = withStyle('button')({
+  marginTop: 8,
+  borderRadius: 10,
+  borderWidth: 0.5
 })
-const RoundedButton = withStyle(MyButton)({
-  borderRadius: 10
+
+const ShadowRoundedButton = withStyle(RoundedButton)({
+  boxShadow: '1px 4px 1px #9E9E9E'
 })
-const CircleButton = withStyle(MyButton)<{ size: number }>(props => ({
-  borderRadius: props.size,
+
+const DisabledButton = withStyle(RoundedButton)(props => ({
+  backgroundColor: props.disabled ? '#999' : '#F0F0F0'
+}))
+
+const CircleButton = withStyle('button')<{ size: number }>(props => ({
+  borderRadius: props.size / 2,
   height: props.size,
   width: props.size
 }))
 
-// Colored Buttons
-const YellowButton = withStyle(MyButton)({
-  backgroundColor: '#FFCC00'
-})
-const RedButton = withStyle(MyButton)({
-  backgroundColor: '#FF3333'
-})
-const BlueButton = withStyle(MyButton)({
-  backgroundColor: '#0088FF'
-})
-
-// Combined Buttons
-const YellowRoundedButton = withStyle(RoundedButton)({
-  backgroundColor: '#FFCC00'
-})
-const YellowCircleButton = withStyle(CircleButton)({
-  backgroundColor: '#FFCC00'
-})
-
 export const _Button = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <span>Styled Buttons</span>
-      <MyButton>My Button</MyButton>
-      <RoundedButton>Rounded Button</RoundedButton>
-      <CircleButton size={50}>Circle</CircleButton>
+    <div style={{ display: 'flex', flexDirection: 'column', width: 200 }}>
+      <button>Regular Button</button>
+      <RoundedButton onClick={() => console.log('onClick')}>My Rounded Button</RoundedButton>
+      <RoundedButton style={{ backgroundColor: '#FFCC00' }}>My Yellow Button</RoundedButton>
+      <RoundedButton style={{ borderWidth: 1, borderColor: '#FF3333' }}>My Red Border Button</RoundedButton>
+      <ShadowRoundedButton>My Shadow Button</ShadowRoundedButton>
 
-      <span>Colored Buttons</span>
-      <YellowButton>Yellow Button</YellowButton>
-      <RedButton>Red Button</RedButton>
-      <BlueButton>Blue Button</BlueButton>
+      <DisabledButton>Enabled</DisabledButton>
+      <DisabledButton disabled={true}>Disabled</DisabledButton>
 
-      <span>Combined</span>
-      <YellowRoundedButton>Yellow Rounded Button</YellowRoundedButton>
-      <YellowCircleButton size={50}>Yellow Circle</YellowCircleButton>
+      <div style={{ flexDirection: 'row', display: 'flex', marginTop: 10 }}>
+        <CircleButton size={40}>S40</CircleButton>
+        <CircleButton size={60}>S60</CircleButton>
+        <CircleButton size={50}>S50</CircleButton>
+      </div>
     </div>
   )
 }
