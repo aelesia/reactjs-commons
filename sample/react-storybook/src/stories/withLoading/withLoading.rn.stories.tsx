@@ -47,8 +47,7 @@ export const _Button = () => {
         onPress={async () => {
           await sleep(1000)
         }}
-        onLoadingStart={() => console.info('onLoadingStart')}
-        onLoadingEnd={() => console.info('onLoadingEnd')}
+        onLoadingChange={loading => console.info('loading', loading)}
       >
         Loading Button
       </LoadingButton>

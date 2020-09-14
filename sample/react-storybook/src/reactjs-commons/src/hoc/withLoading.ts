@@ -1,4 +1,4 @@
-import React, { JSXElementConstructor, useState } from 'react'
+import React, { JSXElementConstructor, useEffect, useState } from 'react'
 
 export type AsyncProps<T = unknown> = {
   loading: boolean
@@ -11,8 +11,7 @@ export type AsyncComponent<T extends React.FC> = {
 } & React.ComponentProps<T>
 
 type ExtraProps = {
-  onLoadingStart?: () => void
-  onLoadingEnd?: () => void
+  onLoadingChange?: (loading: boolean) => void
 }
 
 type withAsyncOptions<T extends JSXElementConstructor<any>> = {
@@ -39,6 +38,9 @@ export const withLoading = <Component extends JSXElementConstructor<any>>(
     // @ts-ignore
     const asyncHandler = getAsyncHandlers(options?.asyncHandler)
     const [loading, setLoading] = useState<boolean>(false)
+    useEffect(() => {
+      p.onLoadingChange?.(loading)
+    }, [loading])
     const map: Record<string, Function> = {}
 
     asyncHandler.forEach(funcName => {
@@ -48,7 +50,6 @@ export const withLoading = <Component extends JSXElementConstructor<any>>(
           try {
             const result = p[funcName](...args)
             if (result instanceof Promise) {
-              p.onLoadingStart?.()
               setLoading(true)
             }
             await result
@@ -56,7 +57,6 @@ export const withLoading = <Component extends JSXElementConstructor<any>>(
             console.error('Uncaught promise in AsyncButton: ' + err)
           } finally {
             setLoading(false)
-            p.onLoadingEnd?.()
           }
         }
       }
