@@ -10,6 +10,11 @@ export type AsyncComponent<T extends React.FC> = {
   disabled: boolean
 } & React.ComponentProps<T>
 
+type ExtraProps = {
+  onLoadingStart?: () => void
+  onLoadingEnd?: () => void
+}
+
 type withAsyncOptions<T extends JSXElementConstructor<any>> = {
   asyncHandler?: keyof React.ComponentProps<T> | (keyof React.ComponentProps<T>)[]
   omitProps?: ('loading' | 'disabled')[]
@@ -30,11 +35,12 @@ export const withLoading = <Component extends JSXElementConstructor<any>>(
   WrappedComponent: Component,
   options?: withAsyncOptions<Component>
 ) => {
-  const HOC: React.FC<React.ComponentProps<Component>> = (p: any) => {
+  return (p: React.ComponentProps<Component> & ExtraProps) => {
     // @ts-ignore
     const asyncHandler = getAsyncHandlers(options?.asyncHandler)
     const [loading, setLoading] = useState<boolean>(false)
     const map: Record<string, Function> = {}
+
     asyncHandler.forEach(funcName => {
       // @ts-ignore
       map[funcName] = async (...args: any[]) => {
@@ -42,6 +48,7 @@ export const withLoading = <Component extends JSXElementConstructor<any>>(
           try {
             const result = p[funcName](...args)
             if (result instanceof Promise) {
+              p.onLoadingStart?.()
               setLoading(true)
             }
             await result
@@ -49,22 +56,22 @@ export const withLoading = <Component extends JSXElementConstructor<any>>(
             console.error('Uncaught promise in AsyncButton: ' + err)
           } finally {
             setLoading(false)
+            p.onLoadingEnd?.()
           }
         }
       }
     })
-    const props: any = {}
-    if (!options?.omitProps?.includes('loading')) {
-      props['loading'] = loading
+    const props = {
+      loading,
+      disabled: p.disabled === true || loading
     }
-    if (!options?.omitProps?.includes('disabled')) {
-      props['disabled'] = p.disabled === true || loading
-    }
+    options?.omitProps?.forEach(omitProp => {
+      delete props[omitProp]
+    })
     return React.createElement(WrappedComponent, {
       ...p,
       ...props,
       ...map
     })
   }
-  return HOC
 }
