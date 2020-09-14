@@ -16,14 +16,13 @@ export function withStyle<Component extends React.ElementType>(
     | ((props: React.ComponentProps<Component> & Props) => React.ComponentProps<Component>['style'])
 ) => React.FC<React.ComponentProps<Component> & Props>
 
-
 export function withStyle<Component extends React.ElementType>(WrappedComponent: Component) {
   return <Props = {}>(
     style:
       | React.ComponentProps<Component>['style']
       | ((
-      props: React.ComponentProps<Component> & Props
-    ) => React.ComponentProps<Component>['style'])
+          props: React.ComponentProps<Component> & Props
+        ) => React.ComponentProps<Component>['style'])
   ): React.FC<React.ComponentProps<Component> & Props> => {
     return props => {
       return React.createElement(WrappedComponent, {
