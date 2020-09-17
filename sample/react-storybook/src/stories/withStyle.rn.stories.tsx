@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { withStyle } from '../reactjs-commons/src/hoc/withStyle'
+import { withStyle } from '../reactjs-commons/src/hoc/withStyle2'
 import { Text, View, TextStyle, TouchableOpacity } from 'react-native-web'
 
 export default {

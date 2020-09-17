@@ -35,5 +35,3 @@ export function withStyle<Component extends React.ElementType>(WrappedComponent:
     }
   }
 }
-
-
