@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { withStyle } from '../reactjs-commons/src/hoc/withStyle2'
+import { withStyle } from '../reactjs-commons/src/hoc/withStyle'
 import { Text, View, TextStyle, TouchableOpacity } from 'react-native-web'
 
 export default {
@@ -36,7 +36,7 @@ const Button: React.FC<
 const RoundedButton = withStyle(Button)({
   marginTop: 8,
   borderRadius: 10,
-  borderWidth: 0.5
+  borderWidth: 0.5,
 })
 
 const ShadowRoundedButton = withStyle(RoundedButton)({
@@ -51,13 +51,13 @@ const ShadowRoundedButton = withStyle(RoundedButton)({
 })
 
 const DisabledButton = withStyle(RoundedButton)(props => ({
-  backgroundColor: props.disabled ? '#999' : '#F0F0F0'
+  backgroundColor: props.disabled ? '#999' : '#F0F0F0',
 }))
 
 const CircleButton = withStyle(Button)<{ size: number }>(props => ({
   borderRadius: props.size / 2,
   height: props.size,
-  width: props.size,
+  width: props.size
 }))
 
 export const _Button = () => {
