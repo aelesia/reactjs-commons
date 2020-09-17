@@ -6,7 +6,8 @@
 	"extends": [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/eslint-recommended",
-		"prettier"
+		"prettier",
+    "@react-native-community"
 	],
 	"globals": {
 		"Atomics": "readonly",
@@ -29,6 +30,9 @@
 		"@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
 		"prettier/prettier": "warn",
-		"prefer-const": "off"
+		"prefer-const": "off",
+    "semi": "off", // Handled by prettierrc.js
+    "comma-dangle": "off", // Handled by prettierrc.js
+    "no-extra-semi": "off" // Handled by prettierrc.js
 	}
 }

@@ -71,8 +71,11 @@ const BorderedScrollPropView = withProps(ScrollView)({
   showsVerticalScrollIndicator: false
 })
 
+const Component: React.FC<{loading: boolean}> = {} as any
+
+
 export const _Button = () => {
-  const ref = useRef(null)
+  const ref = useRef<ScrollView>(null)
 
   return (
     <>

@@ -1,29 +1,34 @@
-import React from 'react'
+import React, { forwardRef, ReactHTML } from 'react'
+import { Props, Style } from '../commons/Common'
 
-export const withProps = <
-  Component extends React.ElementType,
-  OmitProps extends keyof React.ComponentProps<Component>
->(
-  WrappedComponent: Component,
-  options?: {
-    omit?: OmitProps[]
-  }
-) => <Props = {}>(
-  props:
-    | React.ComponentProps<Component>
-    | ((_props: React.ComponentProps<Component> & Props) => React.ComponentProps<Component>)
-): React.FC<Omit<React.ComponentProps<Component>, OmitProps> & Props> => {
-  return p => {
-    return React.createElement(WrappedComponent, {
-      // @ts-ignore
-      ...(typeof props === 'function' ? props(p) : props),
-      ...p,
-      style: {
-        // @ts-ignore
-        ...(typeof props === 'function' ? props(p)['style'] : props['style']),
-        // @ts-ignore
-        ...p.style
-      }
-    })
+function mapStyles(defaultProps: any, props: any) {
+  const keys = Object.keys(props)
+  return keys
+    .filter(key => key.endsWith('style'))
+    .map(key => ({
+      [key]: { ...defaultProps[key], ...props[key] }
+    }))
+}
+
+// Takes in any ReactComponent
+// @usage: `withStyle(Button)`
+export function withProps<Component extends React.ElementType>(WrappedComponent: Component) {
+  //
+  return function curry<ExtraProps = {}>(
+    defaultProps: Props<Component> | ((props: Props<Component> & ExtraProps) => Props<Component>)
+  ): React.FC<Props<Component> & ExtraProps> {
+    //
+    return forwardRef((props: any, ref: any) => {
+      //
+      const _defaultPropsEval = // @ts-ignore
+        typeof defaultProps === 'function' ? defaultProps(props) : defaultProps
+      //
+      return React.createElement(WrappedComponent, {
+        ..._defaultPropsEval,
+        ...props,
+        ...mapStyles(_defaultPropsEval, props),
+        ref: ref
+      })
+    }) as React.FC
   }
 }
