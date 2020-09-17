@@ -2,6 +2,8 @@ import React, { HTMLAttributes } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { withStyle } from '../reactjs-commons/src/hoc/withStyle2'
 import { Text, View, TextStyle, TouchableOpacity } from 'react-native-web'
+import {Animated} from "react-native";
+import ScrollView = Animated.ScrollView;
 
 export default {
   title: 'HOC/withStyle (RN)'
