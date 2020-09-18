@@ -46,6 +46,12 @@ const MyStyledDisabledButton = withProps(Button)(props => ({
   textStyle: { color: props.disabled ? '#666' : undefined }
 }))
 
+
+
+// const MyOmittedButton = withProps(Button, {
+//   omit: ['style', "textStyle"]
+// })({})
+
 const MyLoadingButton = withProps(Button)<{
   loading?: boolean
 }>(p => ({
@@ -103,6 +109,8 @@ export const _Button = () => {
         <Text>Hello</Text>
         <Text>Hello</Text>
       </BorderedScrollPropView>
+
+      {/*<MyOmittedButton></MyOmittedButton>*/}
 
       <Button
         onPress={() => {

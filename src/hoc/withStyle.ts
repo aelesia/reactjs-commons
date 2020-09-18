@@ -1,16 +1,16 @@
 import React, { forwardRef, ReactHTML } from 'react'
 import { Props, Style } from '../commons/Common'
 
-// type HTMLKey = keyof ReactHTML
-// type HTMLComponent<T extends HTMLKey> = JSX.IntrinsicElements[T]
-//
-// export function withStyle<T extends HTMLKey, Component extends HTMLComponent<T>>(
-//   HTMLFactory: T
-// ): <ExtraProps = {}>(
-//   style:
-//     | JSX.IntrinsicElements[T]['style']
-//     | ((props: JSX.IntrinsicElements[T] & ExtraProps) => JSX.IntrinsicElements[T]['style'])
-// ) => React.FC<JSX.IntrinsicElements[T] & ExtraProps>
+type HTMLKey = keyof ReactHTML
+type HTMLComponent<T extends HTMLKey> = JSX.IntrinsicElements[T]
+
+export function withStyle<T extends HTMLKey, Component extends HTMLComponent<T>>(
+  HTMLFactory: T
+): <ExtraProps = {}>(
+  style:
+    | JSX.IntrinsicElements[T]['style']
+    | ((props: JSX.IntrinsicElements[T] & ExtraProps) => JSX.IntrinsicElements[T]['style'])
+) => React.FC<JSX.IntrinsicElements[T] & ExtraProps>
 
 // Takes in any ReactComponent
 // @usage: `withStyle(Button)`
